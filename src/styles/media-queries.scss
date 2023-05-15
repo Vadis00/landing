@@ -1,0 +1,40 @@
+$media: (
+    xxs: 385px,
+    xs: 430px,
+    sm: 600px,
+    md: 800px,
+    lg: 1024px,
+    xl: 1200px,
+    xxl: 1500px,
+);
+
+@mixin media-min($breakpoint) {
+    $size: map-get($media, $breakpoint);
+
+    @if $size !=null {
+        @media screen and (min-width: $size) {
+            @content;
+        }
+    }
+}
+
+@mixin media-max($breakpoint) {
+    $size: map-get($media, $breakpoint);
+
+    @if $size !=null {
+        @media screen and (max-width: $size) {
+            @content;
+        }
+    }
+}
+
+@mixin media-between($from, $to) {
+    $fromSize: map-get($media, $from);
+    $toSize: map-get($media, $to);
+
+    @if $fromSize !=null and $toSize !=null {
+        @media screen and (min-width: $fromSize) and (max-width: $toSize) {
+            @content;
+        }
+    }
+}
